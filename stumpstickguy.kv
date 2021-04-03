@@ -1,0 +1,35 @@
+#:kivy 2.0
+
+<AppBoxLayout>:
+    #adaptive_height: True
+    md_bg_color: app.theme_cls.primary_color
+    orientation: 'vertical'
+    MDBoxLayout:
+        md_bg_color: app.theme_cls.primary_color
+        Image:
+            source: 'data/png/stick_4.png'
+            size_hint: 3, 1
+        Image:
+            source: 'data/png/stick_4.png'
+    BoxLayout:
+        #md_bg_color: app.theme_cls.primary_color
+        Label:
+        MDIconButton:
+            line_color: 0, 0, 0,
+            user_font_size: '64sp'
+            #size_hint: 1, 1
+            pos_hint: {'right': 1}
+            text_color: 0, 0, 0, 1
+            icon: 'data/icon/check-black-android/res/drawable-hdpi/baseline_check_black_48.png'
+        MDBoxLayout:
+            md_bg_color: app.theme_cls.primary_color
+            orientation: 'vertical'
+            size_hint: 1, 1
+            MDIconButton:
+                pos_hint: {'left': 1}
+                icon: 'data/icon/keyboard_arrow_up-black-android/res/drawable-hdpi/baseline_keyboard_arrow_up_black_48.png'
+            MDIconButton:
+                pos_hint: {'left': 1}
+                icon: 'data/icon/keyboard_arrow_down-black-android/res/drawable-hdpi/baseline_keyboard_arrow_down_black_48.png'
+        Label:
+        Label:
