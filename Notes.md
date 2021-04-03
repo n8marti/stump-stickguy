@@ -3,10 +3,11 @@
 - App guidelines: https://developer.android.com/docs/quality-guidelines/core-app-quality
 - Material Design: https://material.io/components?platform=android
 - KivyMD base: https://kivymd.readthedocs.io/en/latest/getting-started/
+- MD icons: https://fonts.google.com/icons?selected=Material+Icons
 
 ### Development
 - [ ] Set up testing
-- [ ] Create animated stick figures
+- [x] Create [animated?] stick figures
 - [ ] Create number line graph
 - [ ] Set up main window
 
