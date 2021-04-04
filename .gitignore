@@ -1,5 +1,5 @@
 # mutable file
-data/last_numberline.png
+data/*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
