@@ -16,9 +16,9 @@
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="button-icons.svg"
-   inkscape:export-filename="/home/nate/dev/stump-stickguy/data/icon/down-circle.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96">
+   inkscape:export-filename="/home/nate/dev/stump-stickguy/data/icon/check-circle.png"
+   inkscape:export-xdpi="128"
+   inkscape:export-ydpi="128">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -29,10 +29,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.2"
-     inkscape:cx="19.251485"
+     inkscape:cx="-1.1949436"
      inkscape:cy="24.227796"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer2"
      showgrid="true"
      units="px"
      inkscape:window-width="1600"
@@ -73,7 +73,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -81,7 +81,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="check"
-     style="display:none">
+     style="display:inline">
     <g
        style="display:inline"
        id="g891"
@@ -122,7 +122,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="down"
-     style="display:inline">
+     style="display:none">
     <g
        style="display:inline"
        id="g968-5"
