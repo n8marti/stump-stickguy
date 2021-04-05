@@ -8,7 +8,7 @@
 ### Development
 - [ ] Set up testing
 - [x] Create [animated?] stick figures
-- [ ] Create number line graph
+- [x] Create number line graph
 - [ ] Set up main window
 
 ### Publishing
