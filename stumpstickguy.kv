@@ -5,13 +5,15 @@
     img_numberline: img_numberline
     label_rem_guesses: label_rem_guesses
 
-    md_bg_color: app.theme_cls.primary_light
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
     orientation: 'vertical'
 
-    MDBoxLayout:
+    BoxLayout:
         # Top section: 2 images.
         adaptive_height: True
-        md_bg_color: app.theme_cls.primary_light
         size_hint: 1, 0.8
         padding: [40]
 
@@ -22,47 +24,68 @@
             id: img_numberline
             source: 'data/last_numberline.png'
 
-    MDLabel:
+    Label:
         # Remaining guesses.
         id: label_rem_guesses
+        color: [0, 0, 0, 1]
         text: ''
         halign: 'center'
-        theme_text_color: 'ContrastParentBackground'
         font_style: 'Body1'
         size_hint: 1, 0.05
 
-    MDBoxLayout:
+    BoxLayout:
         # Bottom section: 3 buttons.
-        md_bg_color: app.theme_cls.primary_light
         size_hint: 1, 0.15
         #padding: [10]
         spacing: 10
 
-        MDLabel:
+        Label:
             # Spacer.
             size_hint: 0.25, 1
-        MDBoxLayout:
+        BoxLayout:
             # Buttons.
             spacing: 5
             size_hint: 0.5, 1
-            md_bg_color: app.theme_cls.primary_light
 
-            MDIconButton:
-                #adaptive_width: True
-                user_font_size: '64sp'
+            MyButton:
+                # user_font_size: '64sp'
                 #size_hint: 0.67, 1
-                icon: 'data/icon/check-circle.png'
+                img_src: 'data/icon/check-circle.png'
                 on_release: root.handle_check_clicked(self)
-            MDBoxLayout:
+
+            BoxLayout:
                 #spacing: 5
                 orientation: 'vertical'
                 size_hint: 0.33, 1
-                MDIconButton:
-                    icon: 'data/icon/up-circle.png'
+                MyButton:
+                    img_src: 'data/icon/up-circle.png'
                     on_release: root.handle_higher_clicked(self)
-                MDIconButton:
-                    icon: 'data/icon/down-circle.png'
+
+                MyButton:
+                    img_src: 'data/icon/down-circle.png'
                     on_release: root.handle_lower_clicked(self)
-        MDLabel:
+        Label:
             # Spacer.
             size_hint: 0.25, 1
+
+
+# Define background color template.
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+# Combine BackgroundColor with regular widget to create custom widget.
+<MyButton@Button+BackgroundColor>
+    # Default background color (r, g, b, a).
+    background_color: 1, 1, 1, 0
+    img_src: 'data/icon/check-circle.png'
+    Image:
+        source: root.img_src
+        allow_stretch: False
+        pos: self.parent.pos
+        size: self.parent.width, self.parent.height

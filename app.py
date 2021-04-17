@@ -1,15 +1,14 @@
 #from kivy.uix.screenmanager import Screen
-from kivy.properties import ObjectProperty
 
-from kivymd.app import MDApp
-from kivymd.uix.boxlayout import MDBoxLayout
-#from kivymd.uix.dialog import MDDialog
-#from kivymd.uix.textfield import MDTextField
+from kivy.app import App
+from kivy.properties import ObjectProperty
+from kivy.uix.boxlayout import BoxLayout
 
 import guesser, plotter
 
 
-class AppBoxLayout(MDBoxLayout):
+#class AppBoxLayout(MDBoxLayout):
+class AppBoxLayout(BoxLayout):
     stickguy = 'data/png/stick_4.png'
     numberline = 'data/last_numberline.png'
 
@@ -98,12 +97,13 @@ class AppBoxLayout(MDBoxLayout):
         return stickguy
 
 
-class StumpStickguyApp(MDApp):
+#class StumpStickguyApp(MDApp):
+class StumpStickguyApp(App):
     #max_dialog = None
 
     def build(self):
-        self.theme_cls.primary_palette = "LightBlue"
-        self.theme_cls.theme_style = "Dark"
+        # self.theme_cls.primary_palette = "LightBlue"
+        # self.theme_cls.theme_style = "Dark"
         #screen = Screen()
         #return screen
         window = AppBoxLayout()
@@ -124,4 +124,5 @@ class StumpStickguyApp(MDApp):
         self.max_dialog.open()
     """
 
-StumpStickguyApp().run()
+if __name__ == "__main__":
+    StumpStickguyApp().run()
