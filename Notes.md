@@ -9,7 +9,8 @@
 - [ ] Set up testing
 - [x] Create [animated?] stick figures
 - [x] Create number line graph
-- [ ] Set up main window
+- [ ] Allow user to set max value.
+- [ ] Add "Go" or "Restart" button.
 
 ### Publishing
 - [ ] Content rating "Everyone"
