@@ -5,7 +5,7 @@ def draw_numberline(ymin, ymax, previous_guesses, current_limits, current_guess)
 
     # Set up the figure.
     fig, ax = plt.subplots(figsize=(3, 5))
-    ax.set_xlim(0, 2)
+    ax.set_xlim(0, 1.5)
     ax.set_ylim(0, ymax + 1)
 
     # Draw lines.
@@ -21,7 +21,14 @@ def draw_numberline(ymin, ymax, previous_guesses, current_limits, current_guess)
         plt.plot(x, guess, marker='_', markersize=10, color='grey')
 
     # Draw current limits as a line.
-    plt.plot([x, x], current_limits, marker='_', markersize=15, color='red', linewidth=5)
+    plt.plot(
+        [x, x],
+        current_limits,
+        marker='_',
+        markersize=15,
+        color='red',
+        linewidth=5
+    )
 
     # Draw current guess as a single tick and label it.
     plt.plot(
