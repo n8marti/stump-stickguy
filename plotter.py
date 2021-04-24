@@ -63,4 +63,5 @@ def draw_numberline(ymin, ymax, previous_guesses, current_limits, current_guess)
 
     plt.axis('off')
     fig.savefig('data/last_numberline.png', transparent=True)
+    plt.close()
     return fig
