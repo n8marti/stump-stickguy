@@ -10,68 +10,60 @@
             pos: self.pos
             size: self.size
     orientation: 'vertical'
+    padding: [30, 20, 20, 20]
 
     BoxLayout:
         # Top section: 2 images.
         adaptive_height: True
         size_hint: 1, 0.8
-        padding: [20]
+        #padding: [30, 20, 20, 20]
 
         Image:
             id: img_stickguy
             source: root.stickguy
         Image:
             id: img_numberline
-            source: 'data/last_numberline.png'
+            source: root.numberline
 
     Label:
         # Remaining guesses.
-        id: label_rem_guesses
         color: [0, 0, 0, 1]
-        text: ''
-        halign: 'center'
         font_style: 'Body1'
+        halign: 'center'
+        id: label_rem_guesses
         size_hint: 1, 0.05
+        text: ''
 
     BoxLayout:
         # Bottom section: 3 buttons.
-        size_hint: 1, 0.15
-        #padding: [10]
-        spacing: 10
+        pos_hint: {'center_x': 0.5}
+        size_hint: 0.4, 0.15
+        spacing: 5
 
-        Label:
-            # Spacer.
-            size_hint: 0.25, 1
+        IconButton:
+            size_hint: 0.67, 1
+            img_src: 'data/icon/check-circle.png'
+            on_release: root.handle_check_clicked(self)
+
         BoxLayout:
-            # Buttons.
+            #spacing: 5
+            orientation: 'vertical'
+            size_hint: 0.33, 1
             spacing: 5
-            size_hint: 0.5, 1
 
-            MyButton:
-                # user_font_size: '64sp'
-                #size_hint: 0.67, 1
-                img_src: 'data/icon/check-circle.png'
-                on_release: root.handle_check_clicked(self)
+            IconButton:
+                img_src: 'data/icon/up-circle.png'
+                on_release: root.handle_higher_clicked(self)
 
-            BoxLayout:
-                #spacing: 5
-                orientation: 'vertical'
-                size_hint: 0.33, 1
-                MyButton:
-                    img_src: 'data/icon/up-circle.png'
-                    on_release: root.handle_higher_clicked(self)
-
-                MyButton:
-                    img_src: 'data/icon/down-circle.png'
-                    on_release: root.handle_lower_clicked(self)
-        Label:
-            # Spacer.
-            size_hint: 0.25, 1
+            IconButton:
+                img_src: 'data/icon/down-circle.png'
+                on_release: root.handle_lower_clicked(self)
 
 
 # Define background color template.
-<BackgroundColor@Widget>
+<BackgroundColor@Widget>:
     background_color: 1, 1, 1, 1
+    background_normal: ''
     canvas.before:
         Color:
             rgba: root.background_color
@@ -79,9 +71,13 @@
             size: self.size
             pos: self.pos
 
-# Combine BackgroundColor with regular widget to create custom widget.
-<MyButton@Button+BackgroundColor>
+# Combine BackgroundColor with Button.
+<BaseButton@Button+BackgroundColor>:
     # Default background color (r, g, b, a).
+    background_color: 0, 0, 0, 1
+    color: 1, 1, 1, 1
+
+<IconButton@Button+BackgroundColor>:
     background_color: 1, 1, 1, 0
     img_src: 'data/icon/check-circle.png'
     Image:
@@ -89,3 +85,37 @@
         allow_stretch: False
         pos: self.parent.pos
         size: self.parent.width, self.parent.height
+
+<MaxPopup>:
+    user_input: user_input
+
+    auto_dismiss: False
+    background_color: 1, 1, 1, 1
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    size_hint: 0.8, 0.4
+    title: "Choose the upper limit:"
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+
+        TextInput:
+            id: user_input
+            #font_size: 18
+            hint_text: "positive whole numbers only"
+            multiline: False
+            size_hinty: None
+            height: 30
+        BaseButton:
+            text: 'Okay'
+            on_release: app.window.handle_max_clicked(root, user_input.text)
+            pos_hint: {'center_x': 0.5}
+            size_hinty: None
+            height: 30
