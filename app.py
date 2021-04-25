@@ -37,33 +37,34 @@ class AppBoxLayout(BoxLayout):
         self.max_popup.dismiss()
 
     def handle_higher_clicked(self, button):
-        if self.guesses_remaining():
+        if self.current_guess == self.highest:
+            # User made a mistake (or is being cheeky?).
+            self.set_stickguy_wins()
+        elif self.guesses_remaining():
             self.lowest = self.current_guess + 1
             self.current_limits = [self.lowest, self.highest]
             self.previous_guesses.append(self.current_guess)
             self.make_guess()
         else:
             # User wins.
-            self.label_rem_guesses.text = f"Remaining guesses: 0"
-            self.img_stickguy.source = 'data/png/stick_1.png'
-            self.show_button_restart()
+            self.set_user_wins()
 
     def handle_lower_clicked(self, button):
-        if self.guesses_remaining():
+        if self.current_guess == self.lowest:
+            # User made a mistake (or is being cheeky?).
+            self.set_stickguy_wins()
+        elif self.guesses_remaining():
             self.highest = self.current_guess - 1
             self.current_limits = [self.lowest, self.highest]
             self.previous_guesses.append(self.current_guess)
             self.make_guess()
         else:
             # User wins.
-            self.label_rem_guesses.text = f"Remaining guesses: 0"
-            self.img_stickguy.source = 'data/png/stick_1.png'
-            self.show_button_restart()
+            self.set_user_wins()
 
     def handle_check_clicked(self, button):
         # Stickguy wins.
-        self.img_stickguy.source = 'data/png/stick_7.png'
-        self.show_button_restart()
+        self.set_stickguy_wins()
 
     def handle_restart_clicked(self, button):
         # Remove the restart button.
@@ -130,6 +131,15 @@ class AppBoxLayout(BoxLayout):
 
         self.num_guesses = 1
 
+    def set_stickguy_wins(self):
+        self.img_stickguy.source = 'data/png/stick_7.png'
+        self.show_button_restart()
+
+    def set_user_wins(self):
+        self.label_rem_guesses.text = f"Remaining guesses: 0"
+        self.img_stickguy.source = 'data/png/stick_1.png'
+        self.show_button_restart()
+
     def show_button_restart(self):
         self.button_restart = Button()
         self.button_restart.text = "Play again?"
@@ -143,7 +153,7 @@ class AppBoxLayout(BoxLayout):
 
     def verify_user_max(self, user_max):
         try:
-            max_num = int(user_max)
+            max_num = int(''.join(filter(str.isdigit, user_max)))
         except ValueError:
             max_num = False
         return max_num
