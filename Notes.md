@@ -7,10 +7,14 @@
 
 ### Development
 - [ ] Set up testing
+  - Try various values for confidence variable.
+  - Evaluate Stickguy's success rate.
+  - Verify different ways of inputting upper limit numbers.
+- [ ] Build the test app.
 - [x] Create [animated?] stick figures
 - [x] Create number line graph
-- [ ] Allow user to set max value.
-- [ ] Add "Go" or "Restart" button.
+- [x] Allow user to set max value.
+- [x] Add "Go" or "Restart" button.
 
 ### Publishing
 - [ ] Content rating "Everyone"
