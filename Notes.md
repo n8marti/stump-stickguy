@@ -7,9 +7,9 @@
 
 ### Development
 - [ ] Set up testing
-  - Try various values for confidence variable.
-  - Evaluate Stickguy's success rate.
-  - Verify different ways of inputting upper limit numbers.
+  - [ ] Try various values for confidence variable.
+  - [ ] Evaluate Stickguy's success rate.
+  - [x] Verify different ways of inputting upper limit numbers.
 - [ ] Build the test app.
 - [x] Create [animated?] stick figures
 - [x] Create number line graph
@@ -29,25 +29,39 @@
   - https://www.python.org/downloads/
   - https://git-scm.com/downloads
 1. Clone and enter this repository.
-```
-~$ git clone https://github.com/n8marti/stump-stickguy.git
-[... output of git clone command...]
-~$ cd stump-stickguy
-```
+  ```bash
+  # Linux
+  ~$ git clone https://github.com/n8marti/stump-stickguy.git
+  #... output of git clone command...
+  ~$ cd stump-stickguy
+  ```
+  ```powershell
+  # Windows Powershell
+  C:\Users\[Username]\> git clone https://github.com/n8marti/stump-stickguy.git
+  #... output of git clone command...
+  C:\Users\[Username]\> cd stump-stickguy
+  ```
 1. Create and activate a virtual environment.
-```
-~/stump-stickguy$ python3 -m venv env
-~/stump-stickguy$ source env/bin/activate
-```
-  Or in Windows:
-```cmd
-C:\Users\[Username]\stump-stickguy\> env/scripts/activate.bat
-```
+  https://docs.python.org/3/library/venv.html
+  ```bash
+  ~/stump-stickguy$ python3 -m venv env
+  ~/stump-stickguy$ source env/bin/activate
+  ```
+  ```powershell
+  C:\Users\[Username]\stump-stickguy\> py -m venv env
+  C:\Users\[Username]\stump-stickguy\> env/scripts/activate.bat
+  ```
 1. Install dependencies.
-```
-(env) ~/stump-stickguy$ pip3 install --requirement requirements.txt
-```
+  ```bash
+  (env) ~/stump-stickguy$ pip3 install -r requirements.txt
+  ```
+  ```powershell
+  (env) C:\Users\[Username]\stump-stickguy\> pip install -r requirements.txt
+  ```
 1. Run the app.
-```
-(env) ~/stump-stickguy$ python3 app.py
-```
+  ```bash
+  (env) ~/stump-stickguy$ python3 app.py
+  ```
+  ```powershell
+  (env) C:\Users\[Username]\stump-stickguy\> py app.py
+  ```
