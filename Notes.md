@@ -6,11 +6,15 @@
 - MD icons: https://fonts.google.com/icons?selected=Material+Icons
 
 ### Development
-- [ ] Set up testing
-  - [ ] Try various values for confidence variable.
-  - [ ] Evaluate Stickguy's success rate.
-  - [x] Verify different ways of inputting upper limit numbers.
 - [ ] Build the test app.
+- Fixes needed:
+  - Don't let user select "1" as max.
+  - Stickguy always guesses "1" when max is small (less than 5?).
+  - Simulator has user win before Stickguy guesses if max is 2.
+  - App crashes if max is 2.
+- [x] Set up testing
+  - [x] Evaluate Stickguy's success rate.
+  - [x] Verify different ways of inputting upper limit numbers.
 - [x] Create [animated?] stick figures
 - [x] Create number line graph
 - [x] Allow user to set max value.
