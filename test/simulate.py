@@ -1,4 +1,6 @@
-# Simulate the game a bazillion times to evaluate Stickguy's performance.
+"""
+Simulate the game a bazillion times to evaluate Stickguy's performance.
+"""
 
 import csv
 import os
@@ -47,8 +49,13 @@ def play_game(max_number, user_number, gamedata):
 
 data = []
 runs = 1
-if len(sys.argv) > 1:
-    runs = int(sys.argv[1])
+args = sys.argv[:]
+verbose = False
+if len(args) > 1:
+    if '-v' in args:
+        args.remove('-v')
+        verbose = True
+    runs = int(args[1])
 
 # Ensure that outfile exists.
 outfile = test_dir / 'simulations.csv'
@@ -78,9 +85,10 @@ if not outfile.read_text():
 
 # Write data to CSV file.
 for gamedata in data:
-    # for k, v in gamedata.items():
-    #     print(f"{k}: {v}")
-    # print()
+    if verbose:
+        for k, v in gamedata.items():
+            print(f"{k}: {v}")
+        print()
     guesses_list = [str(i) for i in gamedata['guesses']]
     gamedata['guesses'] = ', '.join(guesses_list)
     with open(outfile, 'a', newline='') as f:
