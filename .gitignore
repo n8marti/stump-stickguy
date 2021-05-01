@@ -1,6 +1,7 @@
 # mutable files
 last_numberline.png
 simulations.csv
+.~*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
