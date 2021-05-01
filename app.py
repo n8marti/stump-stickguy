@@ -29,11 +29,12 @@ class AppBoxLayout(BoxLayout):
 
     def handle_max_clicked(self, max_popup, user_max):
         self.max_number = self.verify_user_max(user_max)
+        self.max_popup = max_popup
         if not self.max_number:
+            self.max_popup.user_input.text = ''
             return
         self.set_initial_state(self.max_number)
         self.make_guess()
-        self.max_popup = max_popup
         self.max_popup.dismiss()
 
     def handle_higher_clicked(self, button):
@@ -154,6 +155,8 @@ class AppBoxLayout(BoxLayout):
     def verify_user_max(self, user_max):
         try:
             max_num = int(''.join(filter(str.isdigit, user_max)))
+            if max_num < 3:
+                max_num = False
         except ValueError:
             max_num = False
         return max_num
