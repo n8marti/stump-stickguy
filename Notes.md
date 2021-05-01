@@ -7,13 +7,10 @@
 
 ### Development
 - [ ] Build the test app.
-- Fixes needed:
-  - Don't let user select "1" as max.
-  - Stickguy always guesses "1" when max is small (less than 5?).
-  - Simulator has user win before Stickguy guesses if max is 2.
-  - App crashes if max is 2.
+- Fixes:
+  - Stickguy sometimes guesses the same number twice.
 - [x] Set up testing
-  - [x] Evaluate Stickguy's success rate.
+  - [x] Evaluate Stickguy's success rate (~45% on 2021-05-01).
   - [x] Verify different ways of inputting upper limit numbers.
 - [x] Create [animated?] stick figures
 - [x] Create number line graph
