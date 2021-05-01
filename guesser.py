@@ -8,6 +8,10 @@ def set_guess_range(lowest, highest):
     quarter3 = 3 * quarter1
     guess_min = lowest + quarter1
     guess_max = lowest + quarter3
+    # Special treatment for small ranges.
+    if highest < 8:
+        guess_min = lowest
+        guess_max = highest
     return guess_min, guess_max
 
 def get_confidence(rem_possibilities, rem_guesses):
