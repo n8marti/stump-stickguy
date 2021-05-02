@@ -3,6 +3,9 @@ last_numberline.png
 simulations.csv
 .~*
 
+# development files
+dev/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
