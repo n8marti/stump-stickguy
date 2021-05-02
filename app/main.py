@@ -1,13 +1,17 @@
 #from kivy.uix.screenmanager import Screen
 
 from kivy.app import App
+from kivy.config import Config
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 
 import guesser, plotter
-
+# Config.set('graphics', 'minimum_width', '450')
+# Config.set('graphics', 'minimum_height', '800')
+Config.set('graphics', 'width', '450')
+Config.set('graphics', 'height', '800')
 
 class MaxPopup(Popup):
     user_input = ObjectProperty(None)
@@ -19,6 +23,9 @@ class AppBoxLayout(BoxLayout):
     img_stickguy = ObjectProperty(None)
     img_numberline = ObjectProperty(None)
     label_rem_guesses = ObjectProperty(None)
+    btn_icon_ch = ObjectProperty(None)
+    btn_icon_up = ObjectProperty(None)
+    btn_icon_dn = ObjectProperty(None)
 
     def __init__(self):
         super().__init__()
@@ -118,6 +125,9 @@ class AppBoxLayout(BoxLayout):
         return stickguy
 
     def set_initial_state(self, user_max):
+        self.btn_icon_ch.disabled = False
+        self.btn_icon_up.disabled = False
+        self.btn_icon_dn.disabled = False
         self.lowest = self.min_number
         self.previous_guesses = []
 
@@ -142,6 +152,9 @@ class AppBoxLayout(BoxLayout):
         self.show_button_restart()
 
     def show_button_restart(self):
+        self.btn_icon_ch.disabled = True
+        self.btn_icon_up.disabled = True
+        self.btn_icon_dn.disabled = True
         self.button_restart = Button()
         self.button_restart.text = "Play again?"
         self.button_restart.pos_hint = {'center_x': 0.5}

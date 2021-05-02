@@ -4,6 +4,9 @@
     img_stickguy: img_stickguy
     img_numberline: img_numberline
     label_rem_guesses: label_rem_guesses
+    btn_icon_ch: btn_icon_ch
+    btn_icon_up: btn_icon_up
+    btn_icon_dn: btn_icon_dn
 
     canvas:
         Rectangle:
@@ -11,6 +14,7 @@
             size: self.size
     orientation: 'vertical'
     padding: [30, 20, 20, 20]
+    spacing: 10
 
     BoxLayout:
         # Top section: 2 images.
@@ -41,6 +45,7 @@
         spacing: 5
 
         IconButton:
+            id: btn_icon_ch
             size_hint: 0.67, 1
             img_src: 'data/icon/check-circle.png'
             on_release: root.handle_check_clicked(self)
@@ -52,10 +57,12 @@
             spacing: 5
 
             IconButton:
+                id: btn_icon_up
                 img_src: 'data/icon/up-circle.png'
                 on_release: root.handle_higher_clicked(self)
 
             IconButton:
+                id: btn_icon_dn
                 img_src: 'data/icon/down-circle.png'
                 on_release: root.handle_lower_clicked(self)
 
@@ -82,7 +89,8 @@
     img_src: 'data/icon/check-circle.png'
     Image:
         source: root.img_src
-        allow_stretch: False
+        # allow_stretch: False
+        allow_stretch: True
         pos: self.parent.pos
         size: self.parent.width, self.parent.height
 
@@ -99,8 +107,9 @@
             size: self.size
             pos: self.pos
 
-    size_hint: 0.8, 0.4
+    size_hint: 0.6, 0.2
     title: "Choose the upper limit:"
+    title_size: 20
 
     BoxLayout:
         orientation: 'vertical'
@@ -108,14 +117,14 @@
 
         TextInput:
             id: user_input
-            #font_size: 18
-            hint_text: "choose a whole number > 2"
+            font_size: 18
+            hint_text: "any whole number > 2"
             multiline: False
-            size_hinty: None
-            height: 30
+            # size_hinty: None
+            # height: 10 #30
         BaseButton:
             text: 'Okay'
             on_release: app.window.handle_max_clicked(root, user_input.text)
             pos_hint: {'center_x': 0.5}
-            size_hinty: None
-            height: 30
+            # size_hinty: None
+            # height: 10 #30
