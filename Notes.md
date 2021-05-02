@@ -6,27 +6,16 @@
 - MD icons: https://fonts.google.com/icons?selected=Material+Icons
 
 ### Development
-- [ ] Build the test app.
-    - buildozer.spec: https://buildozer.readthedocs.io/en/latest/specifications.html
-    - example: https://gist.github.com/suizokukan/377d534122cb6c425bce9d957aae47d9
-
+- Build the test app.
+  - buildozer.spec: https://buildozer.readthedocs.io/en/latest/specifications.html
+  - sample: https://raw.githubusercontent.com/kivy/buildozer/master/buildozer/default.spec
 - Fixes:
-  - Decide whether to use SVG or PNG images.
-  - Create app icon.
   - Stickguy sometimes guesses the same number twice.
-- [x] Set up testing
-  - [x] Evaluate Stickguy's success rate (~45% on 2021-05-01).
-  - [x] Verify different ways of inputting upper limit numbers.
-- [x] Create [animated?] stick figures
-- [x] Create number line graph
-- [x] Allow user to set max value.
-- [x] Add "Go" or "Restart" button.
 
 ### Publishing
-- [ ] Content rating "Everyone"
-- [ ] Get crypto key: http://developer.android.com/tools/publishing/app-signing.html#cert
-- [ ] Create app icon
-- [ ] Create app store home page materials
+- Content rating "Everyone"
+- Get crypto key: http://developer.android.com/tools/publishing/app-signing.html#cert
+- Create app store home page materials
   - https://support.google.com/googleplay/android-developer/answer/1078870
   - https://felgo.com/2015/09/7-useful-tips-that-will-improve-your-aso/
 
