@@ -149,6 +149,7 @@
     size_hint: 0.6, 0.20
     title: "Now pick your number and see if Stickguy can guess it!"
     title_size: root.height*0.11
+    on_dismiss: app.window.handle_intro_dismiss()
     canvas.before:
         Color:
             rgba: root.background_color

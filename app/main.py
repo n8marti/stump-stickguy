@@ -41,15 +41,18 @@ class AppBoxLayout(BoxLayout):
 
     def handle_max_release(self, max_popup, button, user_max):
         button.background_color = [0, 0, 0, 1]
-        self.max_number = self.verify_user_max(user_max)
+        self.max_number, text = self.verify_user_max(user_max)
         self.max_popup = max_popup
         if not self.max_number:
+            self.max_popup.user_input.hint_text = text
             self.max_popup.user_input.text = ''
             return
-        self.set_initial_state(self.max_number)
-        self.make_guess()
         self.max_popup.dismiss(animation=False)
         self.intro_popup.open()
+
+    def handle_intro_dismiss(self):
+        self.set_initial_state(self.max_number)
+        self.make_guess()
 
     def handle_higher_clicked(self, button):
         if self.label_hint:
@@ -90,9 +93,12 @@ class AppBoxLayout(BoxLayout):
     def handle_restart_clicked(self, button):
         # Remove the restart button.
         self.remove_widget(self.button_restart)
-        # Restart the app.
-        self.set_initial_state(self.max_number)
-        self.make_guess()
+        # Start a new round.
+        self.img_numberline.source = ''
+        self.img_numberline.reload()
+        self.intro_popup = IntroPopup()
+        self.max_popup = MaxPopup()
+        self.max_popup.open()
 
     def make_guess(self):
         # Update Stickguy according to confidence level.
@@ -179,20 +185,24 @@ class AppBoxLayout(BoxLayout):
         self.label_rem_guesses.text = f"Remaining guesses: {str(rem_guesses)}"
 
     def verify_user_max(self, user_max):
-        try:
-            max_num = int(''.join(filter(str.isdigit, user_max)))
-            if max_num < 3:
-                max_num = False
-        except ValueError:
+        text = ''
+        if len(user_max) > 19:
+            # Too many characters for numpy.
+            text = 'fewer than 19 characters, please'
             max_num = False
-        return max_num
+        else:
+            try:
+                max_num = int(''.join(filter(str.isdigit, user_max)))
+                if max_num < 3:
+                    max_num = False
+            except ValueError:
+                max_num = False
+        return max_num, text
 
 
 class StumpStickguyApp(App):
 
     def build(self):
-        #screen = Screen()
-        #return screen
         self.window = AppBoxLayout()
         return self.window
 
