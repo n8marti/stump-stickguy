@@ -7,7 +7,12 @@
 
 ### Development
 - [ ] Build the test app.
+    - buildozer.spec: https://buildozer.readthedocs.io/en/latest/specifications.html
+    - example: https://gist.github.com/suizokukan/377d534122cb6c425bce9d957aae47d9
+
 - Fixes:
+  - Decide whether to use SVG or PNG images.
+  - Create app icon.
   - Stickguy sometimes guesses the same number twice.
 - [x] Set up testing
   - [x] Evaluate Stickguy's success rate (~45% on 2021-05-01).
