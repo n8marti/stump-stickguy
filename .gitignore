@@ -4,6 +4,7 @@ simulations.csv
 .~*
 
 # development files
+bin/
 dev/
 .buildozer/
 
