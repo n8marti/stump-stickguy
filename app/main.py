@@ -185,7 +185,7 @@ class AppBoxLayout(BoxLayout):
         self.label_rem_guesses.text = f"Remaining guesses: {str(rem_guesses)}"
 
     def verify_user_max(self, user_max):
-        text = ''
+        text = "any whole number > 2"
         if len(user_max) > 19:
             # Too many characters for numpy.
             text = 'fewer than 19 characters, please'
