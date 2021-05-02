@@ -3,24 +3,41 @@
 <AppBoxLayout>:
     img_stickguy: img_stickguy
     img_numberline: img_numberline
-    label_rem_guesses: label_rem_guesses
-    btn_icon_ch: btn_icon_ch
-    btn_icon_up: btn_icon_up
-    btn_icon_dn: btn_icon_dn
+    label_rem_guesses: label_rem_guesses.__self__
+    btn_icon_ch: btn_icon_ch.__self__
+    btn_icon_up: btn_icon_up.__self__
+    btn_icon_dn: btn_icon_dn.__self__
+    label_hint: label_hint.__self__
 
+    orientation: 'vertical'
+    padding: [30, 20, 20, 20]
+    spacing: 10
     canvas:
         Rectangle:
             pos: self.pos
             size: self.size
-    orientation: 'vertical'
-    padding: [30, 20, 20, 20]
-    spacing: 10
+
+    Label:
+        color: [0, 0, 0, 1]
+        font_style: 'Body1'
+        halign: 'center'
+        size_hint: 1, 0.05
+        font_size: root.height*0.045
+        text: 'Is this your number?'
+
+    Label:
+        id: label_hint
+        color: [0, 0, 0, 0.5]
+        font_style: 'Body1'
+        halign: 'center'
+        size_hint: 1, 0.05
+        font_size: root.height*0.02
+        text: '"check" for yes, "up" for higher, "down" for lower'
 
     BoxLayout:
         # Top section: 2 images.
         adaptive_height: True
         size_hint: 1, 0.8
-        #padding: [30, 20, 20, 20]
 
         Image:
             id: img_stickguy
@@ -100,6 +117,9 @@
     auto_dismiss: False
     background_color: 1, 1, 1, 1
     background_normal: ''
+    size_hint: 0.6, 0.20
+    title: "Choose the upper limit:"
+    title_size: root.height*0.11
     canvas.before:
         Color:
             rgba: root.background_color
@@ -107,24 +127,38 @@
             size: self.size
             pos: self.pos
 
-    size_hint: 0.6, 0.2
-    title: "Choose the upper limit:"
-    title_size: 20
-
     BoxLayout:
         orientation: 'vertical'
         spacing: 10
 
         TextInput:
             id: user_input
-            font_size: 18
+            font_size: root.height*0.1
             hint_text: "any whole number > 2"
             multiline: False
-            # size_hinty: None
-            # height: 10 #30
         BaseButton:
             text: 'Okay'
-            on_release: app.window.handle_max_clicked(root, user_input.text)
+            on_press: self.background_color = [1, 1, 1, 1]
+            on_release: app.window.handle_max_release(root, self, user_input.text)
             pos_hint: {'center_x': 0.5}
-            # size_hinty: None
-            # height: 10 #30
+            sizey: root.height*0.33
+
+<IntroPopup>:
+    background_color: 1, 1, 1, 1
+    background_normal: ''
+    size_hint: 0.6, 0.20
+    title: "Now pick your number and see if Stickguy can guess it!"
+    title_size: root.height*0.11
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    BaseButton:
+        text: 'Ready'
+        on_press: self.background_color = [1, 1, 1, 1]
+        on_release: root.dismiss()
+        pos_hint: {'center_x': 0.5}
+        sizey: root.height*0.33

@@ -1,5 +1,7 @@
 #from kivy.uix.screenmanager import Screen
 
+import time
+
 from kivy.app import App
 from kivy.config import Config
 from kivy.properties import ObjectProperty
@@ -8,13 +10,14 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 
 import guesser, plotter
-# Config.set('graphics', 'minimum_width', '450')
-# Config.set('graphics', 'minimum_height', '800')
 Config.set('graphics', 'width', '450')
 Config.set('graphics', 'height', '800')
 
 class MaxPopup(Popup):
     user_input = ObjectProperty(None)
+
+class IntroPopup(Popup):
+    pass
 
 class AppBoxLayout(BoxLayout):
     stickguy = 'data/png/stick_4.png'
@@ -23,6 +26,7 @@ class AppBoxLayout(BoxLayout):
     img_stickguy = ObjectProperty(None)
     img_numberline = ObjectProperty(None)
     label_rem_guesses = ObjectProperty(None)
+    label_hint = ObjectProperty(None)
     btn_icon_ch = ObjectProperty(None)
     btn_icon_up = ObjectProperty(None)
     btn_icon_dn = ObjectProperty(None)
@@ -33,8 +37,10 @@ class AppBoxLayout(BoxLayout):
         self.previous_guesses = []
         self.lowest = self.min_number
         self.max_popup = MaxPopup()
+        self.intro_popup = IntroPopup()
 
-    def handle_max_clicked(self, max_popup, user_max):
+    def handle_max_release(self, max_popup, button, user_max):
+        button.background_color = [0, 0, 0, 1]
         self.max_number = self.verify_user_max(user_max)
         self.max_popup = max_popup
         if not self.max_number:
@@ -42,9 +48,12 @@ class AppBoxLayout(BoxLayout):
             return
         self.set_initial_state(self.max_number)
         self.make_guess()
-        self.max_popup.dismiss()
+        self.max_popup.dismiss(animation=False)
+        self.intro_popup.open()
 
     def handle_higher_clicked(self, button):
+        if self.label_hint:
+            self.remove_widget(self.label_hint)
         if self.current_guess == self.highest:
             # User made a mistake (or is being cheeky?).
             self.set_stickguy_wins()
@@ -58,6 +67,8 @@ class AppBoxLayout(BoxLayout):
             self.set_user_wins()
 
     def handle_lower_clicked(self, button):
+        if self.label_hint:
+            self.remove_widget(self.label_hint)
         if self.current_guess == self.lowest:
             # User made a mistake (or is being cheeky?).
             self.set_stickguy_wins()
@@ -71,6 +82,8 @@ class AppBoxLayout(BoxLayout):
             self.set_user_wins()
 
     def handle_check_clicked(self, button):
+        if self.label_hint:
+            self.remove_widget(self.label_hint)
         # Stickguy wins.
         self.set_stickguy_wins()
 
