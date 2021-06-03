@@ -55,8 +55,8 @@
   ```
 1. Run the app.
   ```bash
-  (env) ~/stump-stickguy$ python3 app.py
+  (env) ~/stump-stickguy$ python3 app/main.py
   ```
   ```powershell
-  (env) C:\Users\[Username]\stump-stickguy\> py app.py
+  (env) C:\Users\[Username]\stump-stickguy\> py app\main.py
   ```
