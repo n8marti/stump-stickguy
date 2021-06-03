@@ -44,7 +44,7 @@
   ```
   ```powershell
   C:\Users\[Username]\stump-stickguy\> py -m venv env
-  C:\Users\[Username]\stump-stickguy\> env/scripts/activate.bat
+  C:\Users\[Username]\stump-stickguy\> env/Scripts/Activate.ps1
   ```
 1. Install dependencies.
   ```bash
