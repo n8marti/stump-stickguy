@@ -3,6 +3,9 @@
 # Manual build-and-sign info here:
 #   https://groups.google.com/g/kivy-users/c/5-G7wkbHb_k/m/LjH2TnTU7lMJ
 
+# Set java version.
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+
 if [[ ! $VIRTUAL_ENV ]]; then
     echo "Virtual environment not activated. Can't build and sign the app."
     exit 1
@@ -24,25 +27,62 @@ if [[ "$(basename "$unsigned_apk" | awk -F'-' '{print $5}')" == 'debug.apk' ]]; 
     debug2='-debug'
 fi
 app="com.n8marti${debug1}.${name_lower}"
-# echo "app: $app"
 alias="${name_lower}-playstore${debug2}"
-# echo "alias: $alias"
 signed_apk="${repo_root}/bin/StumpStickguy.apk"
-# echo "signed_apk: $signed_apk"
+
+# Get password.
+ks_pwd=''
+while [[ -z "$ks_pwd" ]]; do
+    read -s -p "Set keystore password: " pwd_1
+    echo
+    read -s -p "Confirm password: " pwd_2
+    echo
+    if [[ "$pwd_1" == "$pwd_2" ]]; then
+        ks_pwd="$pwd_1"
+    fi
+done
 
 # Ensure keystore for app.
 ks_dir=$(realpath ~/keystores)
 mkdir -p "$ks_dir"
 keystore="${app}.keystore"
-if [[ ! -e "${ks_dir}/${keystore}" ]]; then
-    # Generate keystore for app.
-    keytool -genkey -v -keystore "${ks_dir}/${keystore}" -alias "$alias" -keyalg RSA -keysize 2048 -validity 10000
+ks_path="${ks_dir}/${keystore}"
+if [[ ! -e "$ks_path" ]]; then
+    # Generate keystore for app (using correct version of java keytool).
+    "${JAVA_HOME}/bin/keytool" -genkey -v -keystore "$ks_path" -alias "$alias" -keyalg RSA \
+        -keysize 2048 -validity 10000 -storepass "$ks_pwd" \
+        -dname "cn=Nate Marti, ou=, o=, c=USA"
+        # -dname "cn=myname, ou=mygroup, o=mycompany, c=mycountry"
     ec=$?
     if [[ $ec -ne 0 ]]; then
-        echo "keytool error"
+        echo -e "\nkeytool -genkey error"
+        rm -f "$ks_path"
         exit $ec
     fi
+    # Convert keystore to JKS format.
+    "${JAVA_HOME}/bin/keytool" -importkeystore -srckeystore "$ks_path" -destkeystore "$ks_path" -deststoretype pkcs12 -srcstorepass "$ks_pwd" -deststorepass "$ks_pwd"
+    ec=$?
+    if [[ $ec -ne 0 ]]; then
+        echo "keytool -importkeystore error"
+        rm -f "$ks_path"
+        exit $ec
+    fi
+    # # Re-encrypt using different algorithm.
+    # # THIS LOSES THE KEY'S alias.
+    # openssl pkcs12 -in "$ks_path" -nodes | openssl pkcs12 -export -out "$ks_path"
+    # ec=$?
+    # if [[ $ec -ne 0 ]]; then
+    #     echo "openssl re-encryption error"
+    #     rm -f "$ks_path"
+    #     exit $ec
+    # fi
 fi
+
+# Export variables.
+export P4A_RELEASE_KEYSTORE="${ks_path}"
+export P4A_RELEASE_KEYSTORE_PASSWD="$ks_pwd"
+export P4A_RELEASE_KEYALIAS_PASSWD="$ks_pwd"
+export P4A_RELEASE_KEYALIAS="$alias"
 
 # Ensure release build for app.
 buildozer android release
